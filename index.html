@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Build a Meal for Mom 💐</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff7f0;
+      color: #333;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #e07a5f;
+    }
+    .step {
+      display: none;
+      margin-top: 20px;
+    }
+    .step.active {
+      display: block;
+    }
+    button {
+      margin: 10px;
+      padding: 12px 20px;
+      background-color: #f4a261;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e76f51;
+    }
+    .final-meal {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      background: #ffeedd;
+      padding: 20px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💐 Build a Meal for Mom 💐</h1>
+  <p>Choose your favorite items to create your perfect Mother’s Day meal!</p>
+
+  <div id="step1" class="step active">
+    <h2>🥤 Choose a Drink:</h2>
+    <button onclick="choose('drink', 'Coffee ☕')">Coffee ☕</button>
+    <button onclick="choose('drink', 'Tea 🍵')">Tea 🍵</button>
+    <button onclick="choose('drink', 'Mimosa 🍾')">Mimosa 🍾</button>
+    <button onclick="choose('drink', 'Smoothie 🥤')">Smoothie 🥤</button>
+  </div>
+
+  <div id="step2" class="step">
+    <h2>🍽️ Choose a Main Dish:</h2>
+    <button onclick="choose('main', 'Pancakes 🥞')">Pancakes 🥞</button>
+    <button onclick="choose('main', 'Eggs Benedict 🍳')">Eggs Benedict 🍳</button>
+    <button onclick="choose('main', 'Avocado Toast 🥑')">Avocado Toast 🥑</button>
+    <button onclick="choose('main', 'Waffles 🧇')">Waffles 🧇</button>
+  </div>
+
+  <div id="step3" class="step">
+    <h2>🍓 Choose a Side Dish:</h2>
+    <button onclick="choose('side', 'Fruit Salad 🍓')">Fruit Salad 🍓</button>
+    <button onclick="choose('side', 'Bacon 🥓')">Bacon 🥓</button>
+    <button onclick="choose('side', 'Hash Browns 🥔')">Hash Browns 🥔</button>
+    <button onclick="choose('side', 'Yogurt Parfait 🥣')">Yogurt Parfait 🥣</button>
+  </div>
+
+  <div id="step4" class="step">
+    <h2>🍰 Choose a Dessert:</h2>
+    <button onclick="choose('dessert', 'Cupcake 🧁')">Cupcake 🧁</button>
+    <button onclick="choose('dessert', 'Chocolate Cake 🍫')">Chocolate Cake 🍫</button>
+    <button onclick="choose('dessert', 'Macarons 🌸')">Macarons 🌸</button>
+    <button onclick="choose('dessert', 'Cookies 🍪')">Cookies 🍪</button>
+  </div>
+
+  <div id="result" class="step">
+    <h2>🎉 Your Perfect Mother’s Day Meal! 🎉</h2>
+    <div class="final-meal" id="finalMeal"></div>
+    <p style="margin-top: 20px;"><strong>Happy Mother’s Day! You deserve the most delicious day ever. 💕</strong></p>
+  </div>
+
+  <script>
+    const meal = {};
+    const steps = ['step1', 'step2', 'step3', 'step4', 'result'];
+    let currentStep = 0;
+
+    function choose(type, value) {
+      meal[type] = value;
+      document.getElementById(steps[currentStep]).classList.remove('active');
+      currentStep++;
+      if (currentStep < steps.length - 1) {
+        document.getElementById(steps[currentStep]).classList.add('active');
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById('result').classList.add('active');
+      const mealSummary = `
+        <p><strong>Drink:</strong> ${meal.drink}</p>
+        <p><strong>Main Dish:</strong> ${meal.main}</p>
+        <p><strong>Side Dish:</strong> ${meal.side}</p>
+        <p><strong>Dessert:</strong> ${meal.dessert}</p>
+      `;
+      document.getElementById('finalMeal').innerHTML = mealSummary;
+    }
+  </script>
+
+</body>
+</html>
